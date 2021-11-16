@@ -22,6 +22,11 @@ android {
     buildTypes {
         debug {}
 
+        buildFeatures {
+            dataBinding  true
+            viewBinding  true
+        }
+
         release {
             minifyEnabled true
             shrinkResources true
