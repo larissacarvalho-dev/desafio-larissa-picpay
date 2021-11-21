@@ -1,79 +1,53 @@
 package com.picpay.desafio.android.view.activity
 
+import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.picpay.desafio.android.R
+import com.picpay.desafio.android.databinding.ActivityMainBinding
 import com.picpay.desafio.android.view.adapter.UserListAdapter
-import com.picpay.desafio.android.data.repository.PicPayService
-import com.picpay.desafio.android.data.model.remote.User
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.picpay.desafio.android.viewmodel.UserViewModel
+import io.reactivex.functions.Consumer
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var progressBar: ProgressBar
-    private lateinit var adapter: UserListAdapter
+  private lateinit var adapter: UserListAdapter
 
-    private val url = "https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/"
+  @Inject
+  lateinit var userViewModel: UserViewModel
 
-    private val gson: Gson by lazy { GsonBuilder().create() }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    showUsers()
+  }
 
-    private val okHttp: OkHttpClient by lazy {
-        OkHttpClient.Builder()
-            .build()
-    }
+  override fun createViewBinding(): ActivityMainBinding {
+    return ActivityMainBinding.inflate(layoutInflater)
+  }
 
-    private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(url)
-            .client(okHttp)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-    }
+  private fun showUsers() {
+    adapter = UserListAdapter()
+    viewBinding.recyclerView.adapter = adapter
+    viewBinding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-    private val service: PicPayService by lazy {
-        retrofit.create(PicPayService::class.java)
-    }
+    viewBinding.userListProgressBar.visibility = View.VISIBLE
 
-    override fun onResume() {
-        super.onResume()
+    callAction(userViewModel.getUsers().toObservable(),
+      onSucess = Consumer {
+        viewBinding.userListProgressBar.visibility = View.GONE
 
-        recyclerView = findViewById(R.id.recyclerView)
-        progressBar = findViewById(R.id.user_list_progress_bar)
+        adapter.users = it!!
+      }, onError = Consumer {
+        val message = getString(R.string.error)
+        val title = getString(R.string.title_error)
+        viewBinding.userListProgressBar.visibility = View.GONE
+        viewBinding.recyclerView.visibility = View.GONE
 
-        adapter = UserListAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        progressBar.visibility = View.VISIBLE
-        service.getUsers()
-            .enqueue(object : Callback<List<User>> {
-                override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                    val message = getString(R.string.error)
-
-                    progressBar.visibility = View.GONE
-                    recyclerView.visibility = View.GONE
-
-                    Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
-                    progressBar.visibility = View.GONE
-
-                    adapter.users = response.body()!!
-                }
-            })
-    }
+        Log.e(title, message, it.cause)
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+      })
+  }
 }

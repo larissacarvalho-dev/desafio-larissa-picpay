@@ -23,8 +23,8 @@ android {
         debug {}
 
         buildFeatures {
-            dataBinding  true
-            viewBinding  true
+            dataBinding true
+            viewBinding true
         }
 
         release {
@@ -61,6 +61,10 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -84,6 +88,10 @@ dependencies {
 
     implementation "com.squareup.picasso:picasso:$picasso_version"
     implementation "de.hdodenhof:circleimageview:$circleimageview_version"
+
+    implementation "androidx.room:room-runtime:$room_database"
+    implementation "androidx.room:room-rxjava2:$room_database"
+    kapt "androidx.room:room-compiler:$room_compiler"
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
