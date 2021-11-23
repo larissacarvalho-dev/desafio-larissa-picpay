@@ -19,6 +19,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+
   @Provides
   @Named("baseUrl")
   fun provideBaseUrl(): String {

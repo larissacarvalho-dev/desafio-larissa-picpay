@@ -93,7 +93,11 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_database"
     kapt "androidx.room:room-compiler:$room_compiler"
 
+    implementation "br.com.zup:multi-state-layout:$multiStateLayout"
+
     testImplementation "junit:junit:$junit_version"
+    testImplementation "org.powermock:powermock-module-junit4:$version_powermock"
+    testImplementation "org.powermock:powermock-module-junit4-rule:$version_powermock"
     testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
     testImplementation "androidx.arch.core:core-testing:$core_testing_version"

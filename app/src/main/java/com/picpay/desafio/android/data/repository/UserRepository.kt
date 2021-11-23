@@ -40,15 +40,4 @@ class UserRepository @Inject constructor(
       .subscribeOn(Schedulers.io())
       .observeOn(Schedulers.newThread())
   }
-
-  fun getUserDataBase(): Single<List<User>> {
-    return userDao.getAllUsers().doOnError {
-      Log.e("DATA_BASE_ERROR: ",
-        "Ocorreu um erro ao buscar os dados!", it)
-    }.subscribeOn(Schedulers.io())
-      .observeOn(Schedulers.newThread())
-      .flatMap(Function<List<User>, SingleSource<List<User>>> {
-        return@Function Single.just(it)
-      })
-  }
 }

@@ -5,7 +5,22 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
     android:layout_height="wrap_content">
+
+    <br.com.zup.multistatelayout.MultiStateLayout
+      android:id="@+id/multiStateLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/colorPrimary"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:msl_emptyLayout="@layout/empty_layout"
+      app:msl_loadingLayout="@layout/loading_layout"
+      app:msl_errorLayout="@layout/error_layout"
+      app:msl_state="content">
 
     <androidx.core.widget.NestedScrollView
       android:layout_width="match_parent"
@@ -49,22 +64,9 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/list_item_user" />
 
-          <ProgressBar
-            android:id="@+id/user_list_progress_bar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-            app:layout_constraintStart_toStartOf="@+id/recyclerView"
-            app:layout_constraintTop_toTopOf="@+id/recyclerView"
-            app:layout_constraintVertical_bias="0.3" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
       </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+    </br.com.zup.multistatelayout.MultiStateLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

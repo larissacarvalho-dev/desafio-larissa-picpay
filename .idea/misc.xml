@@ -5,6 +5,21 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/drawable/circle_transparent.xml" value="0.1962962962962963" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/drawable/ic_exclamation.xml" value="0.1962962962962963" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/drawable/ic_round_account_circle.xml" value="0.1962962962962963" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/layout/empty_layout.xml" value="0.3408624229979466" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/layout/error_layout.xml" value="0.2" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/layout/list_item_user.xml" value="0.25" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/layout/loading_layout.xml" value="0.15534420289855072" />
+        <entry key="..\:/Users/laris/Desktop/pic-pay-desafio/desafio-android/app/src/main/res/layout/users_fragment.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

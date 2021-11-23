@@ -26,7 +26,7 @@ class AppController : DaggerApplication() {
       .build()
   }
 
-  fun getDataBase(): AppDatabase{
+  fun getDataBase(): AppDatabase {
     return mAppDatabase
   }
 }

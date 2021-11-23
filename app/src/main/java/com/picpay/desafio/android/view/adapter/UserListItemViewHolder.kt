@@ -1,32 +1,37 @@
 package com.picpay.desafio.android.view.adapter
 
-import android.view.View
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
-import com.picpay.desafio.android.R
-import com.picpay.desafio.android.data.model.remote.User
+import androidx.viewbinding.ViewBinding
+import com.picpay.desafio.android.databinding.ListItemUserBinding
+import com.picpay.desafio.android.viewmodel.presentation.ItemUserPresentation
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_item_user.view.*
 
 class UserListItemViewHolder(
-    itemView: View
-) : RecyclerView.ViewHolder(itemView) {
+  private var viewBinding: ViewBinding,
+  private val itemBinding: ListItemUserBinding = viewBinding as ListItemUserBinding
+) : RecyclerView.ViewHolder(viewBinding.root) {
 
-    fun bind(user: User) {
-        itemView.name.text = user.name
-        itemView.username.text = user.username
-        itemView.progressBar.visibility = View.VISIBLE
-        Picasso.get()
-            .load(user.img)
-            .error(R.drawable.ic_round_account_circle)
-            .into(itemView.picture, object : Callback {
-                override fun onSuccess() {
-                    itemView.progressBar.visibility = View.GONE
-                }
+  fun bind(itemUserPresentation: ItemUserPresentation) {
+    itemBinding.name.text = itemUserPresentation.txtName
+    itemBinding.username.text = itemUserPresentation.txtUsername
+    itemBinding.progressBar.visibility = itemUserPresentation.progressBarVisible
+    Picasso.get()
+      .load(itemUserPresentation.img)
+      .error(itemUserPresentation.defaultImg)
+      .into(itemBinding.picture, object : Callback {
+        override fun onSuccess() {
+          itemView.progressBar.visibility = itemUserPresentation.progressBarGone
+        }
 
-                override fun onError(e: Exception?) {
-                    itemView.progressBar.visibility = View.GONE
-                }
-            })
-    }
+        override fun onError(e: Exception?) {
+          if (e != null) {
+            Log.e("ERROR_PICASSO: ", "Erro ao carregar imagem", e)
+          }
+          itemView.progressBar.visibility = itemUserPresentation.progressBarGone
+        }
+      })
+  }
 }

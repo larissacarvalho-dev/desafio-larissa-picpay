@@ -15,5 +15,7 @@ import dagger.MapKey;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ViewModelKey {
+  //você pode usar qualquer classe desde que ela herde as caracteristicas de viewModel
+  // (explicação da implementação)
   Class<? extends ViewModel> value();
 }

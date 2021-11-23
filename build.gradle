@@ -31,6 +31,8 @@ buildscript {
         core_ktx_test_version = "1.2.0"
         room_database = "2.3.0"
         room_compiler = "2.2.5"
+        multiStateLayout = "1.0.3"
+        version_powermock = "2.0.0"
     }
 
     repositories {
