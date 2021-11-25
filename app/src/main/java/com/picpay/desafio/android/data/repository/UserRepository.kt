@@ -28,7 +28,7 @@ class UserRepository @Inject constructor(
       .observeOn(AndroidSchedulers.mainThread())
   }
 
-  private fun saveUsers(users: List<User>): Single<List<User>> {
+  fun saveUsers(users: List<User>): Single<List<User>> {
     return Single.create(SingleOnSubscribe<List<User>> {
       val usersClone: MutableList<User> = ArrayList()
       for (user: User in users) {
