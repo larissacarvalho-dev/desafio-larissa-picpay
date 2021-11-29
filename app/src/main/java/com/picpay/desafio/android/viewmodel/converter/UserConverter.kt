@@ -1,6 +1,7 @@
 package com.picpay.desafio.android.viewmodel.converter
 
 import android.view.View
+import android.view.View.GONE
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.data.model.remote.User
 import com.picpay.desafio.android.viewmodel.presentation.ItemUserPresentation
@@ -32,14 +33,20 @@ class UserConverter @Inject constructor() {
   }
 
   private fun getItemPresentation(user: User): ItemUserPresentation {
-
-    return ItemUserPresentation.Builder()
-      .setImg(user.img)
-      .setTxtName(user.name)
-      .setTxtUsername(user.username)
-      .setProgressBarVisible(View.VISIBLE)
-      .setProgressBarGone(View.GONE)
-      .setDefaultImg(R.drawable.ic_round_account_circle)
-      .build()
+    val builder: ItemUserPresentation.Builder = ItemUserPresentation.Builder()
+    if (user.name.trim().isNotEmpty() && user.username.trim().isNotEmpty() && user.img.trim().isNotEmpty()) {
+      builder.setImg(user.img)
+        .setTxtName(user.name)
+        .setTxtUsername(user.username)
+        .setProgressBarVisible(View.VISIBLE)
+        .setProgressBarGone(GONE)
+        .setDefaultImg(R.drawable.ic_round_account_circle)
+        .build()
+    } else {
+      builder.setVisibilityImg(GONE)
+        .setVisibilityUser(GONE)
+        .setVisibilityUsername(GONE)
+    }
+    return builder.build()
   }
 }

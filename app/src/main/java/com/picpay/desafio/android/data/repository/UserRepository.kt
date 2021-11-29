@@ -1,6 +1,7 @@
 package com.picpay.desafio.android.data.repository
 
 import android.util.Log
+import com.picpay.desafio.android.constants.UserConstants
 import com.picpay.desafio.android.data.model.local.UserDAO
 import com.picpay.desafio.android.data.model.remote.User
 import io.reactivex.Single
@@ -36,8 +37,24 @@ class UserRepository @Inject constructor(
       }
       userDao.insertAllUsers(usersClone)
       it.onSuccess(users)
-    }).doOnError { Log.e("DATA_BASE_ERROR: ", "Ocorreu um erro ao salvar os dados!", it) }
+    }).doOnError {
+      Log.e(UserConstants.DataBase.DATA_BASE_ERROR, UserConstants.DataBase.MESSAGE_ERROR_SAVE, it)
+    }
       .subscribeOn(Schedulers.io())
       .observeOn(Schedulers.newThread())
+  }
+
+  fun getUsersDao(): Single<List<User>> {
+    return userDao.getAllUsers().doOnError {
+      Log.e(UserConstants.DataBase.DATA_BASE_ERROR, UserConstants.DataBase.MESSAGE_ERROR_GET, it)
+    }
+      .subscribeOn(Schedulers.io())
+      .observeOn(Schedulers.newThread())
+      .flatMap(Function<List<User>, SingleSource<List<User>>> {
+        if (it.isEmpty()) {
+          return@Function getUsers()
+        }
+        return@Function Single.just(it)
+      })
   }
 }

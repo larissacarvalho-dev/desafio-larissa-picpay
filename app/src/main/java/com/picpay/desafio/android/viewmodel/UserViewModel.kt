@@ -18,7 +18,7 @@ class UserViewModel @Inject constructor(
 ) : ViewModel() {
 
   fun getUserPresentation(): Single<UserPresentation> {
-    return userRepository.getUsers().flatMap(Function<List<User>, SingleSource<UserPresentation>> {
+    return userRepository.getUsersDao().flatMap(Function<List<User>, SingleSource<UserPresentation>> {
       return@Function Single.just(converter.convertUsers(it))
     }).subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
