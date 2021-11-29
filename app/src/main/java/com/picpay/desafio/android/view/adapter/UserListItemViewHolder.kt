@@ -43,7 +43,7 @@ class UserListItemViewHolder(
   private fun img(itemUserPresentation: ItemUserPresentation): String {
     var img = itemUserPresentation.img
     if (img.isEmpty()) {
-      img = "https://randomuser.me/api/portraits/men/1.jpg"
+      img = UserConstants.Picasso.IMG_EMPTY
     }
     return img
   }

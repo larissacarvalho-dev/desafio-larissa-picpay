@@ -2,9 +2,11 @@ package com.picpay.desafio.android.constants
 
 class UserConstants {
 
+
    object Picasso{
     const val ERROR_PICASSO = "ERROR_PICASSO: "
     const val MESSAGE_ERROR_PICASSO = "Erro ao carregar imagem"
+     const val IMG_EMPTY ="https://randomuser.me/api/portraits/men/1.jpg"
   }
 
   object DataBase {
