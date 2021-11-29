@@ -24,7 +24,7 @@ class UserListItemViewHolder(
     itemBinding.picture.visibility = itemUserPresentation.visibilityItem
 
     Picasso.get()
-      .load(itemUserPresentation.img)
+      .load(img(itemUserPresentation))
       .error(itemUserPresentation.defaultImg)
       .into(itemBinding.picture, object : Callback {
         override fun onSuccess() {
@@ -38,5 +38,13 @@ class UserListItemViewHolder(
           itemView.progressBar.visibility = itemUserPresentation.progressBarGone
         }
       })
+  }
+
+  private fun img(itemUserPresentation: ItemUserPresentation): String {
+    var img = itemUserPresentation.img
+    if (img.isEmpty()) {
+      img = "https://randomuser.me/api/portraits/men/1.jpg"
+    }
+    return img
   }
 }

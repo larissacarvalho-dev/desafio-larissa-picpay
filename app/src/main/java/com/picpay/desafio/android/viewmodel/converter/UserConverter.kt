@@ -34,14 +34,13 @@ class UserConverter @Inject constructor() {
 
   private fun getItemPresentation(user: User): ItemUserPresentation {
     val builder: ItemUserPresentation.Builder = ItemUserPresentation.Builder()
+    builder.setProgressBarVisible(View.VISIBLE)
+      .setProgressBarGone(GONE)
+      .setDefaultImg(R.drawable.ic_round_account_circle)
     if (user.name.trim().isNotEmpty() && user.username.trim().isNotEmpty() && user.img.trim().isNotEmpty()) {
       builder.setImg(user.img)
         .setTxtName(user.name)
         .setTxtUsername(user.username)
-        .setProgressBarVisible(View.VISIBLE)
-        .setProgressBarGone(GONE)
-        .setDefaultImg(R.drawable.ic_round_account_circle)
-        .build()
     } else {
       builder.setVisibilityItem(GONE)
     }
