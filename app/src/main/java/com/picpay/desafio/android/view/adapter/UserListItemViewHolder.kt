@@ -19,9 +19,9 @@ class UserListItemViewHolder(
     itemBinding.name.text = itemUserPresentation.txtName
     itemBinding.username.text = itemUserPresentation.txtUsername
     itemBinding.progressBar.visibility = itemUserPresentation.progressBarVisible
-    itemBinding.name.visibility = itemUserPresentation.visibilityUser
-    itemBinding.username.visibility = itemUserPresentation.visibilityUsername
-    itemBinding.picture.visibility = itemUserPresentation.visibilityImg
+    itemBinding.name.visibility = itemUserPresentation.visibilityItem
+    itemBinding.username.visibility = itemUserPresentation.visibilityItem
+    itemBinding.picture.visibility = itemUserPresentation.visibilityItem
 
     Picasso.get()
       .load(itemUserPresentation.img)

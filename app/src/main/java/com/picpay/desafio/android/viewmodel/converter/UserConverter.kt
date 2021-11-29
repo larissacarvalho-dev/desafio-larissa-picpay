@@ -43,9 +43,7 @@ class UserConverter @Inject constructor() {
         .setDefaultImg(R.drawable.ic_round_account_circle)
         .build()
     } else {
-      builder.setVisibilityImg(GONE)
-        .setVisibilityUser(GONE)
-        .setVisibilityUsername(GONE)
+      builder.setVisibilityItem(GONE)
     }
     return builder.build()
   }

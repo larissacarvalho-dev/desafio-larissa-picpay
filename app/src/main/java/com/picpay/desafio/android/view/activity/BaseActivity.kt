@@ -42,22 +42,27 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity(),
   override fun onDestroy() {
     rxManager.onClear()
     super.onDestroy()
+    println("onDestroy")
   }
 
   override fun onResume() {
     super.onResume()
+    println("onResume")
   }
 
   override fun onStart() {
     super.onStart()
+    println("onStart")
   }
 
   override fun onPause() {
     super.onPause()
+    println("onPause")
   }
 
   override fun onBackPressed() {
     super.onBackPressed()
+    println("onBackPressed")
   }
 
   protected open fun daggerConfiguration() {

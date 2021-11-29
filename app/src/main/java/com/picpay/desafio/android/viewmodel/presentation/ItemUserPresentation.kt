@@ -7,9 +7,7 @@ class ItemUserPresentation(
   val progressBarVisible: Int,
   val progressBarGone: Int,
   val defaultImg: Int,
-  val visibilityImg: Int,
-  val visibilityUser: Int,
-  val visibilityUsername: Int
+  val visibilityItem: Int
 ) {
 
   class Builder {
@@ -18,10 +16,8 @@ class ItemUserPresentation(
     private var txtUsername = ""
     private var progressBarVisible = 0
     private var progressBarGone = 0
+    private var visibilityItem = 0
     private var defaultImg = 0
-    private var visibilityImg = 0
-    private var visibilityUser = 0
-    private var visibilityUsername = 0
 
     fun setImg(img: String): Builder {
       this.img = img
@@ -53,22 +49,12 @@ class ItemUserPresentation(
       return this
     }
 
-    fun setVisibilityUser(visibilityUser: Int): Builder {
-      this.visibilityUser = visibilityUser
-      return this
-    }
-
-    fun setVisibilityUsername(visibilityUsername: Int): Builder {
-      this.visibilityUsername = visibilityUsername
-      return this
-    }
-
-    fun setVisibilityImg(visibilityUsername: Int): Builder {
-      this.visibilityUsername = visibilityUsername
+    fun setVisibilityItem(visibilityItem: Int): Builder {
+      this.visibilityItem = visibilityItem
       return this
     }
 
     fun build(): ItemUserPresentation = ItemUserPresentation(img, txtName, txtUsername, progressBarVisible,
-      progressBarGone, defaultImg, visibilityImg, visibilityUser, visibilityUsername)
+      progressBarGone, defaultImg, visibilityItem)
   }
 }
